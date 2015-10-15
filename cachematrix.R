@@ -23,9 +23,11 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Use this function to extract the inverse from a CasheMatrix 
+## Use this function to extract the inverse from a CacheMatrix 
 ## object. If xCache is such an object, the inverse of the matrix
-## inside is retrieved with invx <- cacheSolve(xCache)
+## inside is retrieved with invx <- cacheSolve(xCache). If the 
+## inverse is not present, it is automatically calculated and
+## stored in xCache, before beeing returned.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
@@ -35,6 +37,6 @@ cacheSolve <- function(x, ...) {
 	}
 	xmatrix <- x$get()
 	invx <- solve(xmatrix, ...)
-	s$setinv(invx)
+	x$setinv(invx)
 	invx
 }
