@@ -1,7 +1,13 @@
-## Put comments here that give an overall description of what your
-## functions do
+## This set of functions handles an object for storing a matrix and 
+## and its inverse. The inverse is only calculated when it is asked
+## for, and then stored in a cache to avoid more computational work
+## if it should be needed again.
 
-## Write a short comment describing this function
+## Create a CacheMatrix object containing a matrix and an empty 
+## placeholder for the inverse. Given an object created with
+##    xCache <- makeCacheMatrix(x)
+## the matrix x can be extracted with xCache$get(),
+## and it can be exchanged for another one with xCache$set(x). 
 
 makeCacheMatrix <- function(x = matrix()) {
 	invx <- NULL
@@ -17,7 +23,9 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## Use this function to extract the inverse from a CasheMatrix 
+## object. If xCache is such an object, the inverse of the matrix
+## inside is retrieved with invx <- cacheSolve(xCache)
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
@@ -26,7 +34,7 @@ cacheSolve <- function(x, ...) {
 		return(invx)
 	}
 	xmatrix <- x$get()
-	invx <- solve(xmatrix)
+	invx <- solve(xmatrix, ...)
 	s$setinv(invx)
 	invx
 }
